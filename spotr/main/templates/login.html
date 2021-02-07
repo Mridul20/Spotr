@@ -1,71 +1,75 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>CodePen - Responsive Signup/Login form</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-<link rel="stylesheet" href="../static/login/app.css">
+   <meta charset="UTF-8">
+   <title>CodePen - Responsive Signup/Login form</title>
+   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+   <link rel="stylesheet" href="../static/login/app.css">
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<div class="container">
-   <section id="formHolder">
+   <!-- partial:index.partial.html -->
+   <div class="container">
+      <section id="formHolder">
 
-      <div class="row">
+         <div class="row">
 
-         <!-- Brand Box -->
-         <div class="col-sm-6 brand">
-            <a href="http://127.0.0.1:8000/"  class="logo"><img src="../static/home/assets/img/navbar-logos.png" alt="" width="100" height="100"/></a>
-            <div class="heading">
-               <h2>SPOTR</h2>
-               <p>Your Right Choice</p>
+            <!-- Brand Box -->
+            <div class="col-sm-6 brand">
+               <a href="http://127.0.0.1:8000/" class="logo"><img src="../static/home/assets/img/navbar-logos.png"
+                     alt="" width="100" height="100" /></a>
+               <div class="heading">
+                  <h2>SPOTR</h2>
+                  <p>Your Right Choice</p>
+               </div>
+            </div>
+
+
+            <!-- Form Box -->
+            <div class="col-sm-6 form">
+               <!-- Login Form -->
+               <div class="login form-peice">
+                  <form class="login-form" action="" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group">
+                        <label for="loginusername">User Name</label>
+                        <input type="username" name="username" required>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" name="password" required>
+                     </div>
+
+                     <div class="CTA">
+                        <input type="submit" value="Login" name="Login">
+                        <a href="register">I'm New</a>
+                     </div>
+                  </form>
+               </div><!-- End Login Form -->
+
             </div>
          </div>
 
-
-         <!-- Form Box -->
-         <div class="col-sm-6 form">
-            <!-- Login Form -->
-            <div class="login form-peice">
-               <form class="login-form" action="" method="POST">
-                  {% csrf_token %}
-                  <div class="form-group">
-                     <label for="loginusername">User Name</label>
-                     <input type="username" name="username" required>
-                  </div>
-
-                  <div class="form-group">
-                     <label for="loginPassword">Password</label>
-                     <input type="password" name="password"  required>
-                  </div>
-
-                  <div class="CTA">
-                     <button type="submit">Login</button>
-                     <a href="register">I'm New</a>
-                  </div>
-               </form>
-            </div><!-- End Login Form -->
-
-         </div>
-      </div>
-
-   </section>
+      </section>
 
 
-   <footer>
-      <p>
-         Form made by: BinaryBots
-      </p>
-   </footer>
+      <footer>
+         <p>
+            Form made by: BinaryBots
+         </p>
+      </footer>
 
-</div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+   </div>
+   <!-- partial -->
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 
-<script src="../static/login/app.js"></script>
+   <script src="../static/login/app.js"></script>
 
 </body>
+
 </html>
