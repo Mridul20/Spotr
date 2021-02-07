@@ -7,11 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel="stylesheet" href="../static/login/app.css">
-<script>
-   function pageRedirect() {
-     window.location.href = "./startbootstrap-agency-gh-pages/index.html";
-   }      
-</script> 
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -22,38 +17,32 @@
 
          <!-- Brand Box -->
          <div class="col-sm-6 brand">
-            <a href="#" class="logo">MR <span>.</span></a>
-
+            <a href ="http://127.0.0.1:8000/" class="logo"> S <span></span></a>
             <div class="heading">
                <h2>SPOTR</h2>
                <p>Your Right Choice</p>
-            </div>
-
-            <div class="success-msg">
-               <p>Great! You are one of our members now</p>
-               <a href="#" class="profile">Your Profile</a>
             </div>
          </div>
 
 
          <!-- Form Box -->
          <div class="col-sm-6 form">
-
             <!-- Login Form -->
             <div class="login form-peice">
-               <form class="login-form" action="#" method="post">
+               <form class="login-form" action="" method="POST">
+                  {% csrf_token %}
                   <div class="form-group">
-                     <label for="loginemail">Email Adderss</label>
-                     <input type="email" name="loginemail" id="loginemail" required>
+                     <label for="loginusername">User Name</label>
+                     <input type="username" name="username" required>
                   </div>
 
                   <div class="form-group">
                      <label for="loginPassword">Password</label>
-                     <input type="password" name="loginPassword" id="loginPassword" required>
+                     <input type="password" name="password"  required>
                   </div>
 
                   <div class="CTA">
-                     <button type="button" onclick="pageRedirect()">Login</button>
+                     <button type="submit">Login</button>
                      <a href="register">I'm New</a>
                   </div>
                </form>
