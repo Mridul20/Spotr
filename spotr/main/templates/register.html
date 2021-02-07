@@ -7,11 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel="stylesheet" href="../static/login/app.css">
-<script>
-   function pageRedirect() {
-     window.location.href = "./startbootstrap-agency-gh-pages/index.html";
-   }      
-</script> 
 </head>
 
 
@@ -19,13 +14,10 @@
     <!-- partial:index.partial.html -->
     <div class="container">
        <section id="formHolder">
-    
           <div class="row">
-    
              <!-- Brand Box -->
              <div class="col-sm-6 brand">
-                <a href="#" class="logo">MR <span>.</span></a>
-    
+               <a href="http://127.0.0.1:8000/"  class="logo"><img src="../static/home/assets/img/navbar-logos.png" alt="" width="100" height="100"/></a>
                 <div class="heading">
                    <h2>SPOTR</h2>
                    <p>Your Right Choice</p>
@@ -72,11 +64,7 @@
                          {{form.password2}}
                          <span class="error"></span>
                       </div>
-                        <!-- {% csrf_token %}
-                        {%for field in form %}
-                        {{field}}
-                        {%endfor%} -->
-                        <!-- <input type="submit" name = "create user ">     -->
+
                         <div class="CTA">
                             <input type="submit" name="Signup Now" >
                             <a href="login">I have an account</a>
