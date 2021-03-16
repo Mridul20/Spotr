@@ -4,6 +4,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+import json
+import requests
+import numpy as np
+import pandas as pd
+
+import requests
+from requests.auth import HTTPBasicAuth
 # Create your views here.
 
 from .forms import CreateUserForm
@@ -45,3 +53,15 @@ def loginpage(request):
 def logoutuser(request):
     logout(request)
     return redirect('main:login')
+
+def github(request):
+    
+    credentials = {"username" : "spotr-se" , "password" : "spotrisnumber1"}
+    username = "Mridul20"
+    authentication = HTTPBasicAuth(credentials['username'], credentials['password'])
+    data = requests.get('https://api.github.com/users/' + username, auth = authentication)
+    data = data.json()
+    
+    context = {'data':data}
+    print("Name: {}".format(data['name']))
+    return render(request, "github.html", context)

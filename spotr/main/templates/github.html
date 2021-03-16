@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Profile Card</title>
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="../static/github/style.css">
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <div class="wrapper">
+
+
+    <div class="profile-card js-profile-card">
+      <div class="profile-card__img">
+        <img src="{{data.avatar_url}}"
+          alt="profile card">
+      </div>
+
+      <div class="profile-card__cnt js-profile-cnt">
+        <div class="profile-card__name"> {{data.name}} ({{data.login}})</div>
+        <div class="profile-card__txt"><strong>{{data.bio}}</strong></div>
+        <div class="profile-card-loc">
+          <span class="profile-card-loc__txt">
+            {{data.location}}
+          </span>
+        </div>
+
+        <div class="profile-card-inf">
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title"><a href = "https://github.com/{{data.login}}?tab=followers">{{data.followers}}</a></div>
+            <div class="profile-card-inf__txt">Followers</div>
+          </div>
+
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title"><a href = "https://github.com/{{data.login}}?tab=following">{{data.following}}</a></div>
+            <div class="profile-card-inf__txt">Following</div>
+          </div>
+
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title"><a href = "https://github.com/{{data.login}}?tab=repositories">{{data.public_repos}}</a></div>
+            <div class="profile-card-inf__txt">Repositories</div>
+          </div>
+        </div>
+
+        <div class="profile-card-inf created">
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title" style="font-size: 1.3em;">Created At :</div>
+          </div>
+
+          <div class="profile-card-inf__item">
+            <div  style="font-size: 1.1em;">{{data.created_at}}</div>
+          </div>
+        </div>
+        <div class="profile-card-inf created">
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title " style="font-size: 1.3em;">Last Updated At :</div>
+          </div>
+
+          <div class="profile-card-inf__item">
+            <div  style="font-size: 1.1em;">{{data.updated_at}}</div>
+          </div>
+        </div>
+
+        <div class="profile-card-ctr">
+          <button class="profile-card__button button--blue js-message-btn"
+            onclick="document.location='https://github.com/{{data.login}}'">Display Profile</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+</body>
+
+</html>
