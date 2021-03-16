@@ -25,4 +25,6 @@ urlpatterns = [
     path('register',views.register,name = "register"),
     path('logout',views.logoutuser,name = "logout"),
     path('github',views.github,name = "github"),
+    path('codeforces',views.codeforces,name = "codeforces"),
+    path('instagram',views.instagram,name = "instagram"),
 ]
