@@ -12,13 +12,15 @@ import pandas as pd
 
 import requests
 from requests.auth import HTTPBasicAuth
+
+from datetime import datetime
+
 # Create your views here.
 
 from .forms import CreateUserForm
 cars = []
 def homepage(request):
     context = {}
-
     if request.method == 'POST':    
 
         user = request.POST.get('username')
@@ -33,7 +35,6 @@ def homepage(request):
 
 def register(request):
     form = CreateUserForm()
-
     if request.method == 'POST':    
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -78,7 +79,13 @@ def codeforces(request):
     user = cars[-1]
     data = requests.get('https://codeforces.com/api/user.info?handles=' + user)
     data = data.json()
+    data = data['result'][0]
+    ts = int(data['lastOnlineTimeSeconds'])
+    data['lastOnlineTimeSeconds'] = datetime.utcfromtimestamp(ts).strftime('%H:%M:%S  %d-%m-%Y')
+    ts = int(data['registrationTimeSeconds'])
+    data['registrationTimeSeconds'] = datetime.utcfromtimestamp(ts).strftime('%H:%M:%S  %d-%m-%Y')
     context = {'data':data}
+    print(data)
     return render(request, "codeforces.html", context)
 
 def instagram(request):

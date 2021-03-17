@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-  <link rel="stylesheet" href="../static/codefroces/style.css">
+  <link rel="stylesheet" href="../static/codeforces/style.css">
 </head>
 
 <body>
@@ -20,32 +20,37 @@
 
     <div class="profile-card js-profile-card">
       <div class="profile-card__img">
-        <img src="http://userpic.codeforces.com/no-title.jpg"
+        <img src="{{data.titlePhoto}}"
           alt="profile card">
       </div>
 
       <div class="profile-card__cnt js-profile-cnt">
-        <div class="profile-card__name">Muhammed Erdem (Username)</div>
-        <div class="profile-card__txt"><strong>Biography</strong></div>
+        <div class="profile-card__name">{{data.firstName}} {{data.lastName}} ({{data.handle}})</div>
+        <div class="profile-card__txt"><strong>{{data.rank}}</strong></div>
         <div class="profile-card-loc">
           <span class="profile-card-loc__txt">
-            Istanbul, Turkey
+            {{data.organization}}
+          </span>
+        </div>
+        <div class="profile-card-loc">
+          <span class="profile-card-loc__txt">
+            {{data.city}} , {{data.country}}
           </span>
         </div>
 
         <div class="profile-card-inf">
           <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title">1598</div>
+            <div class="profile-card-inf__title">{{data.rating}}</div>
             <div class="profile-card-inf__txt">Current Rating</div>
           </div>
 
           <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title">65</div>
+            <div class="profile-card-inf__title">{{data.maxRating}}</div>
             <div class="profile-card-inf__txt">Highest Rating</div>
           </div>
 
           <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title">85</div>
+            <div class="profile-card-inf__title">{{data.friendOfCount}}</div>
             <div class="profile-card-inf__txt">Friends</div>
           </div>
         </div>
@@ -57,21 +62,30 @@
           </div>
 
           <div class="profile-card-inf__item">
-            <div  style="font-size: 1.1em;">NewBie</div>
+            <div  style="font-size: 1.1em;">{{data.maxRank}}</div>
           </div>
         </div>
         <div class="profile-card-inf created">
           <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title " style="font-size: 1.3em;">Friends : </div>
+            <div class="profile-card-inf__title " style="font-size: 1.3em;">Last Online: </div>
           </div>
 
           <div class="profile-card-inf__item">
-            <div  style="font-size: 1.1em;">Number</div>
+            <div  style="font-size: 1.1em;">{{data.lastOnlineTimeSeconds}}</div>
           </div>
         </div>
-        <div class="profile-card-ctr">
+        <div class="profile-card-inf created">
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title " style="font-size: 1.3em;">Registered: </div>
+          </div>
+
+          <div class="profile-card-inf__item">
+            <div  style="font-size: 1.1em;">{{data.registrationTimeSeconds}}</div>
+          </div>
+        </div>
+        <div class="profile-card-ctr">  
           <button class="profile-card__button button--blue js-message-btn"
-            onclick="document.location='https://www.instagram.com/piyush_gurjar17/'">Display Profile</button>
+            onclick="document.location='https://codeforces.com/profile/{{data.handle}}'">Display Profile</button>
         </div>
       </div>
     </div>
