@@ -56,14 +56,9 @@
                             <div class="searchbar">
                                 <input class="search_input" type="text" name="username" placeholder="Search...">
                                 {% if user.is_authenticated %}
-                                <!-- <a href="#portfolio" class="search_icon"><i class="fas fa-search"></i></a> -->
-                                <!-- <input href="#portfolio" class="search_icon" type="submit" value="Go" /> -->
-                                <input href="#portfolio" class="search_icon" type="submit"   value="OK"> 
-    
+                                <a href = "#portfolio"><input  class="search_icon" type="submit" value="OK"> </a>
                                 {% else %}
-                                <!-- <a href="login" class="search_icon"><i class="fas fa-search"></i></a> -->
-                                <!-- <input href="login" class="search_icon" type="submit" value="Go" /> -->
-                                <input href="login" class="search_icon" type="submit"   value="OK"> 
+                                <a href = "login"><input  class="search_icon" type="submit" value="OK"></a>
                                 {% endif %}
                             </div>
     

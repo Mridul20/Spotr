@@ -22,15 +22,9 @@ cars = []
 def homepage(request):
     context = {}
     if request.method == 'POST':    
-
         user = request.POST.get('username')
-        if request.user.is_authenticated:
-            print("Logged in")
-        else:
-            print("Not logged in")
-            return redirect('main:login')
-        
         cars.append(user) 
+        
     return render(request, "home.html", context)
 
 def register(request):
