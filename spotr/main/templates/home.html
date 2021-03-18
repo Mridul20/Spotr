@@ -51,17 +51,12 @@
                 <div class="container h-100">
                     <div class="d-flex justify-content-center h-100">
                         
-                        <form action="" method="POST">
+                        <form action="#portfolio" method="POST">
                             {% csrf_token %} 
                             <div class="searchbar">
                                 <input class="search_input" type="text" name="username" placeholder="Search...">
-                                {% if user.is_authenticated %}
-                                <a href = "#portfolio"><input  class="search_icon" type="submit" value="OK"></a>
-                                {% else %}
-                                <a href = "login"><input  class="search_icon" type="submit" value="OK"></a>
-                                {% endif %}
+                                <input  class="search_icon" type="submit" value="OK">
                             </div>
-    
                         </form>
 
                     </div>

@@ -20,8 +20,15 @@ from datetime import datetime
 from .forms import CreateUserForm
 cars = []
 def homepage(request):
+    user = request.POST.get('username')
+
     context = {}
-    if request.method == 'POST':    
+    if request.method == 'POST':   
+        if request.user.is_authenticated:
+            print("Logged in")
+        else:
+            print("Not logged in")
+            return redirect('main:login') 
         user = request.POST.get('username')
         cars.append(user) 
         
@@ -34,6 +41,10 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect('main:login')
+        else:
+            for msg in form.error_messages:
+                messages.error(request, f"{msg}: {form.error_messages[msg]}")
+                print(msg)   
 
 
     context = {'form':form} 
