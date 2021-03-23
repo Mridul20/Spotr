@@ -8,7 +8,13 @@ from django.contrib.auth.decorators import login_required
 import json
 import requests
 import numpy as np
+import tweepy 
 import pandas as pd
+import re
+import matplotlib.pyplot as plt
+from textblob import TextBlob
+from wordcloud import WordCloud
+
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -70,6 +76,21 @@ def check(user):
     #         found["instagram"] = 0
     # except:
     #     found["instagram"] = 1 
+
+    consumer_key = "FD9TutCsyTjewPgwptwwBMSAd" 
+    consumer_secret = "D2BNZf0rt1KLBx0hofRjX7vqIsGI9lTxp2gPRvVtq2ZuAvj4lT" 
+    access_token = "832235344527388672-rwia0zreGAtm92wXgHryhHVRWFMnhx9" 
+    access_token_secret = "4Oc10vpIBdkTR3AxTQYDUZ0bAXNKEzDlmSjZdJjDgkq3g" 
+
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret) 
+    auth.set_access_token(access_token, access_token_secret) 
+    api = tweepy.API(auth) 
+    try :
+        user = api.get_user('@' + user) 
+        data = user._json
+        found['twitter'] = 1
+    except :
+        found['twitter'] = 0
     return found
 
 def register(request):
@@ -148,3 +169,20 @@ def instagram(request):
     data=data.json()
     context = {'data':data}
     return render(request, "instagram.html", context)
+
+def twitter(request):
+    user = cars[-1]
+    context = {}
+    consumer_key = "FD9TutCsyTjewPgwptwwBMSAd" 
+    consumer_secret = "D2BNZf0rt1KLBx0hofRjX7vqIsGI9lTxp2gPRvVtq2ZuAvj4lT" 
+    access_token = "832235344527388672-rwia0zreGAtm92wXgHryhHVRWFMnhx9" 
+    access_token_secret = "4Oc10vpIBdkTR3AxTQYDUZ0bAXNKEzDlmSjZdJjDgkq3g" 
+
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret) 
+    auth.set_access_token(access_token, access_token_secret) 
+    api = tweepy.API(auth) 
+    user = api.get_user('@' + user) 
+    data = user._json
+    # data['profile_image_url'] = re.findall(r'/^(.*?)\_normal/', data['profile_image_url']) + '_400x400.jpg'
+    context = {'data':data}
+    return render(request, "twitter.html", context)

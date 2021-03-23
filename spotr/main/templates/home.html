@@ -153,15 +153,19 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 mb-4">
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+                            <a class="portfolio-link"  href="twitter">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
+                                {% if found.twitter == 1 %}
+                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/twitter.png" alt="" />
+                                {% else %}
                                 <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/twitter (1).png" alt="" />
+                                {% endif %} 
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Twitter</div>
-                                <div class="portfolio-caption-subheading text-muted">Identity</div>
+                                <div class="portfolio-caption-subheading text-muted">Identity {{found.twitter}}</div>
                             </div>
                         </div>
                     </div>
