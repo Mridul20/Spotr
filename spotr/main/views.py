@@ -20,19 +20,57 @@ from datetime import datetime
 from .forms import CreateUserForm
 cars = []
 def homepage(request):
-    user = request.POST.get('username')
-
     context = {}
     if request.method == 'POST':   
         if request.user.is_authenticated:
             print("Logged in")
+            user = request.POST.get('username')
+            cars.append(user)
+            found = check(user)
+            context = {"found" : found}
+            return render(request, "home.html", context)
         else:
             print("Not logged in")
             return redirect('main:login') 
-        user = request.POST.get('username')
-        cars.append(user) 
-        
+                
     return render(request, "home.html", context)
+
+def check(user):
+
+    found = {"search" : 0 , "instagram" : 0,"twitter" : 0,"github" : 0,"linkedin" : 0,"codeforces" : 0,"facebook" : 0}
+    #Codeforces
+    data = requests.get('https://codeforces.com/api/user.info?handles=' + user)
+    data = data.json()
+    if data['status'] == "OK":
+        found["codeforces"] = 1
+    #Github
+    credentials = {"username" : "spotr-se" , "password" : "spotrisnumber1"}
+    authentication = HTTPBasicAuth(credentials['username'], credentials['password'])
+    data = requests.get('https://api.github.com/users/' + user, auth = authentication)
+    data = data.json()
+    try:
+        if(data["message"] == 'Not Found'):
+            found["github"] = 0
+    except:
+        found["github"] = 1 
+    # Instagram
+    # url = "https://instagram40.p.rapidapi.com/account-info"
+
+    # querystring = {"username":user}
+
+    # headers = {
+    #     'x-rapidapi-key': "7de9fb3e1cmshebc5993304d0035p116a4cjsn3ab4d2417fd4",
+    #     'x-rapidapi-host': "instagram40.p.rapidapi.com"
+    #     }
+
+    # data = requests.request("GET", url, headers=headers, params=querystring)
+    # data=data.json()
+    # try:
+    #     if(data["status"] == 'fail'):
+    #         found["instagram"] = 0
+    # except:
+    #     found["instagram"] = 1 
+    return found
 
 def register(request):
     form = CreateUserForm()
@@ -77,20 +115,22 @@ def github(request):
     user = cars[-1]
     data = requests.get('https://api.github.com/users/' + user, auth = authentication)
     data = data.json()
+    print(data)
     context = {'data':data}
     return render(request, "github.html", context)
 
 def codeforces(request):
     user = cars[-1]
+    context = {}
     data = requests.get('https://codeforces.com/api/user.info?handles=' + user)
     data = data.json()
-    data = data['result'][0]
-    ts = int(data['lastOnlineTimeSeconds'])
-    data['lastOnlineTimeSeconds'] = datetime.utcfromtimestamp(ts).strftime('%H:%M:%S  %d-%m-%Y')
-    ts = int(data['registrationTimeSeconds'])
-    data['registrationTimeSeconds'] = datetime.utcfromtimestamp(ts).strftime('%H:%M:%S  %d-%m-%Y')
-    context = {'data':data}
-    print(data)
+    if data['status'] == "OK":
+        data = data['result'][0]
+        ts = int(data['lastOnlineTimeSeconds'])
+        data['lastOnlineTimeSeconds'] = datetime.utcfromtimestamp(ts).strftime('%H:%M:%S  %d-%m-%Y')
+        ts = int(data['registrationTimeSeconds'])
+        data['registrationTimeSeconds'] = datetime.utcfromtimestamp(ts).strftime('%H:%M:%S  %d-%m-%Y')
+        context = {'data':data}
     return render(request, "codeforces.html", context)
 
 def instagram(request):
@@ -100,7 +140,7 @@ def instagram(request):
     querystring = {"username":user}
 
     headers = {
-        'x-rapidapi-key': "c1e45a8cacmshd526afe22796b70p1f1170jsn9bc2e1557a93",
+        'x-rapidapi-key': "7de9fb3e1cmshebc5993304d0035p116a4cjsn3ab4d2417fd4",
         'x-rapidapi-host': "instagram40.p.rapidapi.com"
         }
 

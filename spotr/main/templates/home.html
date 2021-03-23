@@ -2,6 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        <!-- {% if found.search == 0 %}
+        <meta http-equiv="refresh" content="0;url=http://127.0.0.1:8000/#portfolio" />
+        {% endif %} -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
@@ -57,7 +60,7 @@
                 <div class="container h-100">
                     <div class="d-flex justify-content-center h-100">
                         
-                        <form action="#portfolio" method="POST">
+                        <form  method="POST">
                             {% csrf_token %} 
                             <div class="searchbar">
                                 <input class="search_input" type="text" name="username" placeholder="Search...">
@@ -109,6 +112,10 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Search Result</h2>
+                    <a href = "check"><h2 class="section-heading text-uppercase">Find</h2></a>
+                    {%if name is not null %}
+                    <h2 class="section-heading text-uppercase">Search Result {{name}}</h2>
+                    {% endif %}
                     <h3 class="section-subheading text-muted">Following are the Sites to find the User.</h3>
                 </div>
                 <div  id = "mridul" class="row">
@@ -118,11 +125,15 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img  class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/instagram.png" alt="" />
+                                {% if found.instagram == 1 %}
+                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/instagram (2).png" alt="" />
+                                {% else %}
+                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/instagram.png" alt="" />
+                                {% endif %} 
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Instagram</div>
-                                <div class="portfolio-caption-subheading text-muted">Illustration</div>
+                                <div class="portfolio-caption-subheading text-muted">Illustration {{found.instagram}}</div>
                             </div>
                         </div>
                     </div>
@@ -160,11 +171,15 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img  class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/github.png" alt="" />
+                                {% if found.github == 1 %}
+                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/github (2).png" alt="" />
+                                {% else %}
+                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/github.png" alt="" />
+                                {% endif %} 
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Github</div>
-                                <div class="portfolio-caption-subheading text-muted">Branding</div>
+                                <div class="portfolio-caption-subheading text-muted">Branding {{found.github}}</div>
                             </div>
                         </div>
                     </div>
@@ -188,11 +203,15 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
+                                {% if found.codeforces == 1 %}
+                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/codeforces (2).png" alt="" />
+                                {% else %}
                                 <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/codeforces.png" alt="" />
+                                {% endif %} 
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">CodeForces</div>
-                                <div class="portfolio-caption-subheading text-muted">Website Design</div>
+                                <div class="portfolio-caption-subheading text-muted">Website Design {{found.codeforces}}</div>
                             </div>
                         </div>
                     </div>
