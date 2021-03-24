@@ -72,50 +72,11 @@
                   </div>
             </div>
         </header>
-        <!-- Services-->
-        <section class="page-section" id="services">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Services</h2>
-                    <h3 class="section-subheading text-muted">Spotr provides the following services.</h3>
-                </div>
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class='fab fa-searchengin fa-stack-1x ssfa-inverse' style='font-size:64px;color:white'></i>
-                        </span>
-                        <h4 class="my-3">Easy Search</h4>
-                        <p class="text-muted">Easy Searching for fast and efficient Performance.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class='fas fa-user-alt fa-stack-1x ssfa-inverse' style='font-size:64px;color:white'></i>
-                        </span>
-                        <h4 class="my-3">User Profile</h4>
-                        <p class="text-muted">Visit the profile</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <<i class='far fa-smile-beam fa-stack-1x ssfa-inverse' style='font-size:64px;color:white'></i>
-                        </span>
-                        <h4 class="my-3">Sentimental Analysis</h4>
-                        <p class="text-muted">Natural Language Processing Technique to find data Feedback.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Search Result</h2>
-                    <a href = "check"><h2 class="section-heading text-uppercase">Find</h2></a>
-                    {%if name is not null %}
-                    <h2 class="section-heading text-uppercase">Search Result {{name}}</h2>
-                    {% endif %}
                     <h3 class="section-subheading text-muted">Following are the Sites to find the User.</h3>
                 </div>
                 <div  id = "mridul" class="row">
@@ -158,9 +119,9 @@
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
                                 {% if found.twitter == 1 %}
-                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/twitter.png" alt="" />
+                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/twitter (2).png" alt="" />
                                 {% else %}
-                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/twitter (1).png" alt="" />
+                                <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/twitter.png" alt="" />
                                 {% endif %} 
                             </a>
                             <div class="portfolio-caption">
@@ -218,6 +179,41 @@
                                 <div class="portfolio-caption-subheading text-muted">Website Design {{found.codeforces}}</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services-->
+        <section class="page-section" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Services</h2>
+                    <h3 class="section-subheading text-muted">Spotr provides the following services.</h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class='fab fa-searchengin fa-stack-1x ssfa-inverse' style='font-size:64px;color:white'></i>
+                        </span>
+                        <h4 class="my-3">Easy Search</h4>
+                        <p class="text-muted">Easy Searching for fast and efficient Performance.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class='fas fa-user-alt fa-stack-1x ssfa-inverse' style='font-size:64px;color:white'></i>
+                        </span>
+                        <h4 class="my-3">User Profile</h4>
+                        <p class="text-muted">Visit the profile</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <<i class='far fa-smile-beam fa-stack-1x ssfa-inverse' style='font-size:64px;color:white'></i>
+                        </span>
+                        <h4 class="my-3">Sentimental Analysis</h4>
+                        <p class="text-muted">Natural Language Processing Technique to find data Feedback.</p>
                     </div>
                 </div>
             </div>
