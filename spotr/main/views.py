@@ -21,6 +21,7 @@ from requests.auth import HTTPBasicAuth
 
 from datetime import datetime
 
+from main.models import instagram_data
 # Create your views here.
 
 from .forms import CreateUserForm
@@ -60,22 +61,24 @@ def check(user):
     except:
         found["github"] = 1 
     # Instagram
-    # url = "https://instagram40.p.rapidapi.com/account-info"
+    url = "https://instagram40.p.rapidapi.com/account-info"
 
-    # querystring = {"username":user}
+    querystring = {"username":user}
 
-    # headers = {
-    #     'x-rapidapi-key': "7de9fb3e1cmshebc5993304d0035p116a4cjsn3ab4d2417fd4",
-    #     'x-rapidapi-host': "instagram40.p.rapidapi.com"
-    #     }
+    headers = {
+        'x-rapidapi-key': "7de9fb3e1cmshebc5993304d0035p116a4cjsn3ab4d2417fd4",
+        'x-rapidapi-host': "instagram40.p.rapidapi.com"
+        }
 
-    # data = requests.request("GET", url, headers=headers, params=querystring)
-    # data=data.json()
-    # try:
-    #     if(data["status"] == 'fail'):
-    #         found["instagram"] = 0
-    # except:
-    #     found["instagram"] = 1 
+    data = requests.request("GET", url, headers=headers, params=querystring)
+    data=data.json()
+    try:
+        if(data["status"] == 'fail'):
+            found["instagram"] = 0
+    except:
+        found["instagram"] = 1 
+        add = instagram_data(name=data['full_name'],user_name=data['username'],bio=data['biography'],follower=data['edge_followed_by']['count'],following=data['edge_follow']['count'],link="https://www.instagram.com/" + data['username'], posts=data['edge_owner_to_timeline_media']['count'] , private= data['is_private'])
+        add.save()  
 
     consumer_key = "FD9TutCsyTjewPgwptwwBMSAd" 
     consumer_secret = "D2BNZf0rt1KLBx0hofRjX7vqIsGI9lTxp2gPRvVtq2ZuAvj4lT" 
