@@ -13,4 +13,4 @@ django-heroku = "*"
 
 [requires]
 
-python_version = "3.9.2"
+python_version = "3.7.9"
