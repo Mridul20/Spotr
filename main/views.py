@@ -9,7 +9,6 @@ import json
 import requests
 import numpy as np
 import tweepy 
-import pandas as pd
 import re
 import matplotlib.pyplot as plt
 from textblob import TextBlob
