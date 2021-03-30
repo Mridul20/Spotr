@@ -21,6 +21,10 @@ from requests.auth import HTTPBasicAuth
 from datetime import datetime
 
 from main.models import instagram_data
+
+import smtplib
+from smtplib import *
+
 # Create your views here.
 
 from .forms import CreateUserForm
