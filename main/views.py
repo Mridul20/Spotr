@@ -20,7 +20,7 @@ from requests.auth import HTTPBasicAuth
 
 from datetime import datetime
 
-from main.models import instagram_data
+from main.models import *
 
 import smtplib
 from smtplib import *
@@ -48,11 +48,30 @@ def homepage(request):
 def check(user):
 
     found = {"search" : 0 , "instagram" : 0,"twitter" : 0,"github" : 0,"linkedin" : 0,"codeforces" : 0,"facebook" : 0}
+
     #Codeforces
     data = requests.get('https://codeforces.com/api/user.info?handles=' + user)
     data = data.json()
     if data['status'] == "OK":
         found["codeforces"] = 1
+        data = data['result'][0]
+        ts = int(data['lastOnlineTimeSeconds'])
+        data['lastOnlineTimeSeconds'] = datetime.utcfromtimestamp(ts).strftime('%H:%M:%S  %d-%m-%Y')
+        ts = int(data['registrationTimeSeconds'])
+        data['registrationTimeSeconds'] = datetime.utcfromtimestamp(ts).strftime('%H:%M:%S  %d-%m-%Y')
+        try :
+            add = codeforces_data(organisation = data['organisation'],city=data['city'],country=data['country'],
+            first_name=data['firstName'],last_name=data['lastName'],handle=data['handle'], 
+            reg_time = data['registrationTimeSeconds'],last_online = data['lastOnlineTimeSeconds'],
+            friends = data['friendOfCount'] , link = 'https://codeforces.com/profile/' + data['handle'],
+            max_rank=data['maxRank'],max_rating=data['maxRating'],rank=data['rank'],rating = data['rating'] )
+            add.save()               
+        except:
+            add = codeforces_data(handle=data['handle'], reg_time = data['registrationTimeSeconds'],
+            last_online = data['lastOnlineTimeSeconds'],friends = data['friendOfCount'] , 
+            link = 'https://codeforces.com/profile/' + data['handle'])
+            add.save()      
+
     #Github
     credentials = {"username" : "spotr-se" , "password" : "spotrisnumber1"}
     authentication = HTTPBasicAuth(credentials['username'], credentials['password'])
@@ -61,8 +80,12 @@ def check(user):
     try:
         if(data["message"] == 'Not Found'):
             found["github"] = 0
-    except:
+    except: 
         found["github"] = 1 
+        add = github_data(name = data['name'], login =  data['login'], bio = data['bio'],location = data['location'],
+        followers = data['followers'],following = data['following'], public_repos = data['public_repos'],
+        created_at = data['created_at'],updated_at = data['updated_at'],link = 'https://github.com/' + data['login'])
+        add.save()         
     # Instagram
     # url = "https://instagram40.p.rapidapi.com/account-info"
 
@@ -83,6 +106,8 @@ def check(user):
     #     # add = instagram_data(name=data['full_name'],user_name=data['username'],bio=data['biography'],follower=data['edge_followed_by']['count'],following=data['edge_follow']['count'],link="https://www.instagram.com/" + data['username'], posts=data['edge_owner_to_timeline_media']['count'] , private= data['is_private'])
     #     # add.save()      
 
+
+    #Twitter
     consumer_key = "FD9TutCsyTjewPgwptwwBMSAd" 
     consumer_secret = "D2BNZf0rt1KLBx0hofRjX7vqIsGI9lTxp2gPRvVtq2ZuAvj4lT" 
     access_token = "832235344527388672-rwia0zreGAtm92wXgHryhHVRWFMnhx9" 
@@ -95,6 +120,12 @@ def check(user):
         user = api.get_user('@' + user) 
         data = user._json
         found['twitter'] = 1
+        add = twitter_data(name = data['name'], screen_name =  data['screen_name'], description = data['description'],
+                            location = data['location'],follower_count = data['followers_count'],friend_count = data['friends_count'],
+                            created_at = data['created_at'], verified = data['verified'],last_tweet = data['status']['text'],
+                            last_tweet_time = data['status']['created_at'],link = 'https://twitter.com/' + data['screen_name']
+                            )
+        add.save()     
     except :
         found['twitter'] = 0
     return found
