@@ -29,7 +29,7 @@
                 </div>
              </div>
     
-    
+             
              <!-- Form Box -->
              <div class="col-sm-6 form">
               <!-- Signup Form -->
@@ -68,6 +68,11 @@
                         <div class="CTA">
                            <input type="submit" value="Signup Now" id="submit">
                             <a href="login">I have an account</a>
+                            {% if messages %}
+                            {% for message in messages %}
+                             {{message}}
+                            {% endfor %}
+                            {% endif %}
                          </div>
                     </form>
                 </div><!-- End Signup Form -->
