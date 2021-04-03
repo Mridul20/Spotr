@@ -76,7 +76,13 @@
 
         <div class="profile-card-ctr">
           <button class="profile-card__button button--blue js-message-btn"
-            onclick="document.location='https://twitter.com/{{data.screen_name}}'">Display Profile</button>
+          {% if data.screen_name == 'Username' %}
+            onclick="document.location='https://twitter.com/'"
+          {% else %}
+            onclick="document.location='https://twitter.com/{{data.screen_name}}'"
+          {% endif %}
+        >Display Profile</button>
+  
         </div>
       </div>
     </div>

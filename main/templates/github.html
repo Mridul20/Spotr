@@ -71,7 +71,12 @@
 
         <div class="profile-card-ctr">
           <button class="profile-card__button button--blue js-message-btn"
-            onclick="document.location='https://github.com/{{data.login}}'">Display Profile</button>
+          {% if data.login == 'Username' %}
+            onclick="document.location='https://github.com/'"
+          {% else %}
+            onclick="document.location='https://github.com/{{data.login}}'"
+          {% endif %}
+        >Display Profile</button>
         </div>
       </div>
     </div>

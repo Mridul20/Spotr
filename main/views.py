@@ -29,6 +29,7 @@ from smtplib import *
 
 from .forms import CreateUserForm
 cars = []
+found = {"search" : 0 , "instagram" : 0,"twitter" : 0,"github" : 0,"linkedin" : 0,"codeforces" : 0,"facebook" : 0}
 def homepage(request):
     context = {}
     if request.method == 'POST':   
@@ -46,9 +47,8 @@ def homepage(request):
     return render(request, "home.html", context)
 
 def check(user):
-
-    found = {"search" : 0 , "instagram" : 0,"twitter" : 0,"github" : 0,"linkedin" : 0,"codeforces" : 0,"facebook" : 0}
-
+    for key in found:
+        found[key] = 0
     #Codeforces
     data = requests.get('https://codeforces.com/api/user.info?handles=' + user)
     data = data.json()
@@ -173,9 +173,15 @@ def github(request):
     user = cars[-1]
     data = requests.get('https://api.github.com/users/' + user, auth = authentication)
     data = data.json()
-    print(data)
     context = {'data':data}
-    return render(request, "github.html", context)
+    if(found['github'] == 1):
+        return render(request, "github.html", context)
+    else:
+        data = {'name':'Full Name','login':'Username','bio':'Bio','location':'Location','followers':'Followers',
+                'following':'Following','public_repos':'Public Repos','created_at':'Time Created',
+                'updated_at':'Last Updated Time'}
+        context = {'data':data}
+        return render(request, "github.html", context)         
 
 def codeforces(request):
     user = cars[-1]
@@ -189,23 +195,37 @@ def codeforces(request):
         ts = int(data['registrationTimeSeconds'])
         data['registrationTimeSeconds'] = datetime.utcfromtimestamp(ts).strftime('%H:%M:%S  %d-%m-%Y')
         context = {'data':data}
-    return render(request, "codeforces.html", context)
+        return render(request, "codeforces.html", context)
+    else:
+        data = {'firstName':'Full','lastName':'Name','handle':'Username','rank':'Rank','organization':'Organization',
+                'city':'City','country':'Country','rating':'Rating','maxRating':'Max Rating','friendOfCount':'Friend Count',
+                'maxRank':'Max Rank','lastOnlineTimeSeconds':'Last Online Time','registrationTimeSeconds':'Registration Time'}
+        context = {'data':data}
+        return render(request, "codeforces.html", context)  
 
 def instagram(request):
-    user = cars[-1]
-    url = "https://instagram40.p.rapidapi.com/account-info"
+    # user = cars[-1]
+    # url = "https://instagram40.p.rapidapi.com/account-info"
 
-    querystring = {"username":user}
+    # querystring = {"username":user}
 
-    headers = {
-        'x-rapidapi-key': "7de9fb3e1cmshebc5993304d0035p116a4cjsn3ab4d2417fd4",
-        'x-rapidapi-host': "instagram40.p.rapidapi.com"
-        }
+    # headers = {
+    #     'x-rapidapi-key': "7de9fb3e1cmshebc5993304d0035p116a4cjsn3ab4d2417fd4",
+    #     'x-rapidapi-host': "instagram40.p.rapidapi.com"
+    #     }
 
-    data = requests.request("GET", url, headers=headers, params=querystring)
-    data=data.json()
-    context = {'data':data}
-    return render(request, "instagram.html", context)
+    # data = requests.request("GET", url, headers=headers, params=querystring)
+    # data=data.json()
+    # context = {'data':data}
+    if(found['instagram'] == 1):
+        return render(request, "instagram.html", context)
+    else:
+        data = {'full_name':'Full','username':'Username','biography':'Biography','is_private':'Private',
+                'edge_followed_by':{'count': 'Followers' },'edge_follow':{'count': 'Following' } ,
+                'edge_owner_to_timeline_media':{'count': 'Total Post' }}
+        context = {'data':data}
+        return render(request, "instagram.html", context)         
+    
 
 def twitter(request):
     user = cars[-1]
@@ -218,8 +238,18 @@ def twitter(request):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret) 
     auth.set_access_token(access_token, access_token_secret) 
     api = tweepy.API(auth) 
-    user = api.get_user('@' + user) 
-    data = user._json
+    try:
+        user = api.get_user('@' + user) 
+        data = user._json
     # data['profile_image_url'] = re.findall(r'/^(.*?)\_normal/', data['profile_image_url']) + '_400x400.jpg'
-    context = {'data':data}
-    return render(request, "twitter.html", context)
+        context = {'data':data}
+    except:
+        pass
+    if(found['twitter'] == 1):
+        return render(request, "twitter.html", context)
+    else:
+        data = {'name':'Full Name','screen_name':'Username','description':'Description','location':'Location', 
+                'verified':'Verified','followers_count':'Follower Count','friends_count':'Friend Count','created_at':'Created Time',
+                'friendOfCount':'Friend Count','status':{'created_at': 'Last Tweet Time' , 'text':'Last Tweet' }}
+        context = {'data':data}
+        return render(request, "twitter.html", context)  

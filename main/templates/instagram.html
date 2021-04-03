@@ -52,7 +52,12 @@
 
         <div class="profile-card-ctr">
           <button class="profile-card__button button--blue js-message-btn"
-        onclick="document.location='https://www.instagram.com/{{data.username}}'">Display Profile</button>
+          {% if data.username == 'Username' %}
+            onclick="document.location='https://www.instagram.com/'"
+          {% else %}
+            onclick="document.location='https://www.instagram.com/{{data.username}}'"
+          {% endif %}
+        >Display Profile</button>
         </div>
       </div>
     </div>

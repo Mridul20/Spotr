@@ -85,7 +85,12 @@
         </div>
         <div class="profile-card-ctr">  
           <button class="profile-card__button button--blue js-message-btn"
-            onclick="document.location='https://codeforces.com/profile/{{data.handle}}'">Display Profile</button>
+          {% if data.handle == 'Username' %}
+            onclick="document.location='https://codeforces.com/'"
+          {% else %}
+            onclick="document.location='https://codeforces.com/profile/{{data.handle}}'"
+          {% endif %}
+        >Display Profile</button>
         </div>
       </div>
     </div>
