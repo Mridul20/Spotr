@@ -128,11 +128,16 @@
                   <i class="fas fa-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/facebook.png"
+              {% if found.reddit == 1 %}
+              <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/reddit (2).png"
                 alt="" />
+              {% else %}
+              <img class="mridulImage" class="img-fluid" src="../static/home/assets/img/portfolio/reddit.png"
+                alt="" />
+              {% endif %}
             </a>
             <div class="portfolio-caption">
-              <div class="portfolio-caption-heading">Facebook</div>
+              <div class="portfolio-caption-heading">Reddit</div>
               <div class="portfolio-caption-subheading text-muted">
                 Graphic Design
               </div>
