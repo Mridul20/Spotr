@@ -17,38 +17,44 @@
   <!-- partial:index.partial.html -->
   <div class="wrapper">
 
+    <!-- "display_name": "u_wil"
+"public_description": ""
+"verified": true,
+"is_gold": true,
+"awardee_karma": 507
+"awarder_karma": 372,
+"total_karma": 500199,
+"name": "wil"
+"icon_img": ""
+"created_utc": 1142228505.0, -->
 
     <div class="profile-card js-profile-card">
       <div class="profile-card__img">
-        <img src="{{data.profile_image_url}}"
-          alt="profile card">
+        <img src="{{data.data.icon_img}}" alt="profile card">
       </div>
 
       <div class="profile-card__cnt js-profile-cnt">
-        <div class="profile-card__name"> {{data.name}} ({{data.screen_name}})</div>
-        <div class="profile-card__txt"><strong>{{data.description}}</strong></div>
+        <div class="profile-card__name"> {{data.data.name}} ({{data.data.subreddit.display_name}})</div>
+        <div class="profile-card__txt"><strong>{{data.data.subreddit.public_description}}</strong></div>
         <div class="profile-card-loc">
           <span class="profile-card-loc__txt">
-            {{data.location}}
+            Total Karma: {{data.data.total_karma}}
           </span>
         </div>
         <div class="profile-card-loc">
           <span class="profile-card-loc__txt">
-            Verified : {{data.verified}}
+            Verified : {{data.data.verified}}
           </span>
         </div>
 
         <div class="profile-card-inf">
           <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title"><a href = "">{{data.followers_count}}</a></div>
-            <div class="profile-card-inf__txt">Followers</div>
+            <div class="profile-card-inf__title"><a href="">{{data.data.is_gold}}</a></div>
+            <div class="profile-card-inf__txt">Is Gold</div>
           </div>
 
-          <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title"><a href = "">{{data.friends_count}}</a></div>
-            <div class="profile-card-inf__txt">Friends</div>
-          </div>
-<!-- 
+
+          <!-- 
           <div class="profile-card-inf__item">
             <div class="profile-card-inf__title"><a href = "https://github.com/{{data.login}}?tab=repositories">{{data.public_repos}}</a></div>
             <div class="profile-card-inf__txt">Repositories</div>
@@ -61,28 +67,18 @@
           </div>
 
           <div class="profile-card-inf__item">
-            <div  style="font-size: 1.1em;">{{data.created_at}}</div>
-          </div>
-        </div>
-        <div class="profile-card-inf created">
-          <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title " style="font-size: 1.3em;">Last Tweet (at {{data.status.created_at}}):</div>
-          </div>
-
-          <div class="profile-card-inf__item">
-            <div  style="font-size: 1.1em;">{{data.status.text}}</div>
+            <div style="font-size: 1.1em;">{{data.data.created_utc}}</div>
           </div>
         </div>
 
         <div class="profile-card-ctr">
-          <button class="profile-card__button button--blue js-message-btn"
-          {% if data.screen_name == 'Username' %}
-            onclick="document.location='https://twitter.com/'"
+          <button class="profile-card__button button--blue js-message-btn" 
+          {% if data.data.name == 'Name' %}
+            onclick="document.location='https://reddit.com/'" 
           {% else %}
-            onclick="document.location='https://twitter.com/{{data.screen_name}}'"
-          {% endif %}
-        >Display Profile</button>
-  
+            onclick="document.location='https://www.reddit.com/user/{{data.data.name}}/'" {% endif %}>Display
+            Profile</button>
+
         </div>
       </div>
     </div>

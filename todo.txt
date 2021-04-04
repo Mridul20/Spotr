@@ -1,6 +1,7 @@
-1) 2 time api call
+
 2) missing profile pic
 3) insta alternate api
+4) description of social media icons
 4) api display information check 
 5) integrate sentiment analysis
 7**) online host username search problem

@@ -66,5 +66,17 @@ class twitter_data(models.Model):
     def __str__(self):
         return self.screen_name
         
+class reddit_data(models.Model):
+    name = models.CharField(max_length=200,null=True)
+    display_name = models.CharField(max_length=200,null=True) 
+    public_description = models.CharField(max_length=200,null=True)
+    verified = models.CharField(max_length=200,null=True)
+    is_gold = models.CharField(max_length=200,null=True)
+    total_karma = models.CharField(max_length=200,null=True)
+    created_utc = models.CharField(max_length=200,null=True)
+    icon_img = models.CharField(max_length=200,null=True)
+
+    def __str__(self):
+        return self.name
 
 
