@@ -28,4 +28,5 @@ urlpatterns = [
     path('codeforces',views.codeforces,name = "codeforces"),
     path('instagram',views.instagram,name = "instagram"),
     path('twitter',views.twitter,name = "twitter"),
+    path('reddit',views.reddit,name = "reddit"),
 ]

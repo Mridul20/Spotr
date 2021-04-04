@@ -44,6 +44,9 @@ def homepage(request):
         if request.user.is_authenticated:
             print("Logged in")
             user = request.POST.get('username')
+            data_codeforces.clear()
+            data_github.clear()
+            data_twitter.clear()
             found = check(user)
             context = {"found" : found}
             return render(request, "home.html", context)
@@ -150,17 +153,11 @@ def check(user):
         found['twitter'] = 0
 
     # Reddit
-    # print(user)
-    # link = 'https://www.reddit.com/' + user + '/about.json'
-    # data = requests.get(link, headers = {'User-agent': 'your bot 0.2'})
-    # data = requests.get('https://www.reddit.com/user/mridul/about.json')
-    # data = data.json()
-    # headers = {'Authorization': 'Bearer ' + token,
-    #         "User-Agent": "reddit graph plotting v0.1 (by /u/klausachim_sthlm)"}
-    # url = 'https://oauth.reddit.com/r/The_Donald/.json'  # www -> oauth
-    # posts_all = requests.get(url, headers=headers)  # set headers to GET request
-    # data = posts_all.json()  # encode response body (JSON) to Python object
-    # print(data)
+    HEADERS = {"user-agent": "spotr:/u/blackhawk_2081"}
+    link = 'https://www.reddit.com/user/' + user + '/about.json'
+    data = requests.get(link,headers = HEADERS)
+    data = data.json()
+    print(data)
     # if data['status'] == "OK":
     #     data_reddit.clear()
     #     for key in data:
