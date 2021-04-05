@@ -34,8 +34,7 @@
       </div>
 
       <div class="profile-card__cnt js-profile-cnt">
-        <div class="profile-card__name"> {{data.data.name}} ({{data.data.subreddit.display_name}})</div>
-        <div class="profile-card__txt"><strong>{{data.data.subreddit.public_description}}</strong></div>
+        <div class="profile-card__name"> {{data.data.name}} ({{data.data.id}})</div>
         <div class="profile-card-loc">
           <span class="profile-card-loc__txt">
             Total Karma: {{data.data.total_karma}}
@@ -49,7 +48,7 @@
 
         <div class="profile-card-inf">
           <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title"><a href="">{{data.data.is_gold}}</a></div>
+            <div class="profile-card-inf__title">{{data.data.is_gold}}</div>
             <div class="profile-card-inf__txt">Is Gold</div>
           </div>
 

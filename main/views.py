@@ -178,8 +178,7 @@ def check(user):
         data_reddit.clear()
         for key in data:
             data_reddit[key] = data[key]
-        add = reddit_data(name=data['data']['name'], display_name=data['data']['subreddit']['display_name'],
-                          public_description=data['data']['subreddit']['public_description'], total_karma=data['data']['total_karma'],
+        add = reddit_data(name=data['data']['name'], display_name=data['data']['id'],total_karma=data['data']['total_karma'],
                           verified=data['data']['verified'], is_gold=data['data']['is_gold'],
                           created_utc=data['data']['created_utc'], icon_img=data['data']['icon_img'])
         add.save()
