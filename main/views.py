@@ -9,10 +9,13 @@ import json
 import requests
 import numpy as np
 import tweepy
+import threading
 import re
+import os
 import matplotlib.pyplot as plt
 from textblob import TextBlob
 from wordcloud import WordCloud
+import pandas as pd
 
 
 import requests
@@ -143,9 +146,101 @@ def check(user):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
+
     try:
         user_data = api.get_user('@' + user)
         data = user_data._json
+        #Sentiment Analysis
+        twetterApi = tweepy.API(auth, wait_on_rate_limit = True)
+        tweets = tweepy.Cursor(twetterApi.user_timeline, 
+                                screen_name="@" + user, 
+                                count=None,
+                                since_id=None,
+                                max_id=None,
+                                trim_user=True,
+                                exclude_replies=True,
+                                contributor_details=False,
+                                include_entities=False
+                                ).items(50);
+
+        df = pd.DataFrame(data=[tweet.text for tweet in tweets], columns=['Tweet'])
+
+        # Cleaning the tweets
+
+        def cleanUpTweet(txt):
+            # Remove mentions
+            txt = re.sub(r'@[A-Za-z0-9_]+', '', txt)
+            # Remove hashtags
+            txt = re.sub(r'#', '', txt)
+            # Remove retweets:
+            txt = re.sub(r'RT : ', '', txt)
+            # Remove urls
+            txt = re.sub(r'https?:\/\/[A-Za-z0-9\.\/]+', '', txt)
+            return txt
+
+        df['Tweet'] = df['Tweet'].apply(cleanUpTweet)
+        df = df.drop(df[df['Tweet'] == ''].index)
+        # print(df.head(50))
+
+        def getTextSubjectivity(txt):
+            return TextBlob(txt).sentiment.subjectivity
+
+        def getTextPolarity(txt):
+            return TextBlob(txt).sentiment.polarity
+        df['Subjectivity'] = df['Tweet'].apply(getTextSubjectivity)
+        df['Polarity'] = df['Tweet'].apply(getTextPolarity)
+
+        def getTextAnalysis(a):
+            if a < 0:
+                return "Negative"
+            elif a == 0:
+                return "Neutral"
+            else:
+                return "Positive"
+
+        df['Score'] = df['Polarity'].apply(getTextAnalysis)
+        positive = df[df['Score'] == 'Positive']
+        data['positive_tweets'] =  str(positive.shape[0]/(df.shape[0])*100) + " %"
+
+        labels = df.groupby('Score').count().index.values
+        values = df.groupby('Score').size().values
+        plt.switch_backend('agg')
+        plt.bar(labels, values)
+        my_path = os.path.dirname(os.path.realpath(__file__))
+        file_name = my_path +'\\user_data\\' + user + '1.png'
+        print(my_path)
+        plt.savefig(file_name)  
+        data['chart1'] = file_name
+        plt.switch_backend('agg')
+        for index, row in df.iterrows():
+            if row['Score'] == 'Positive':
+                plt.scatter(row['Polarity'], row['Subjectivity'], color="green")
+            elif row['Score'] == 'Negative':
+                plt.scatter(row['Polarity'], row['Subjectivity'], color="red")
+            elif row['Score'] == 'Neutral':
+                plt.scatter(row['Polarity'], row['Subjectivity'], color="blue")
+        plt.switch_backend('agg')
+        plt.title('Twitter Sentiment Analysis')
+        plt.xlabel('Polarity')
+        plt.ylabel('Subjectivity')
+        file_name = my_path +'\\user_data\\' + user + '2.png'
+        plt.savefig(file_name)  
+        data['chart2'] = file_name
+        plt.switch_backend('agg')
+        objective = df[df['Subjectivity'] == 0]
+
+        data['objective_tweets'] = str(objective.shape[0]/(df.shape[0])*100) + " %"
+
+        # Creating a word cloud
+        words = ' '.join([tweet for tweet in df['Tweet']])
+        wordCloud = WordCloud(width=600, height=400).generate(words)
+        plt.switch_backend('agg')
+        plt.imshow(wordCloud)
+        file_name = my_path +'\\user_data\\' + user + '3.png'
+        plt.savefig(file_name)  
+        data['chart3'] = file_name
+        plt.switch_backend('agg')
+        print(data)
         found['twitter'] = 1
         data_twitter.clear()
         for key in data:
@@ -159,13 +254,15 @@ def check(user):
         add.save()
     except:
         found['twitter'] = 0
+    found['twitter'] = 1
+
+
 
     # Reddit
     HEADERS = {"user-agent": "spotr:/u/blackhawk_2081"}
     link = 'https://www.reddit.com/user/' + user + '/about.json'
     data = requests.get(link, headers=HEADERS)
     data = data.json()
-    print(data)
 
     try:
         if(data["message"] == 'Not Found'):

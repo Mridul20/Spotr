@@ -94,33 +94,33 @@ labels = df.groupby('Score').count().index.values
 values = df.groupby('Score').size().values
 
 plt.bar(labels, values)
-
-
-for index, row in df.iterrows():
-    if row['Score'] == 'Positive':
-        plt.scatter(row['Polarity'], row['Subjectivity'], color="green")
-    elif row['Score'] == 'Negative':
-        plt.scatter(row['Polarity'], row['Subjectivity'], color="red")
-    elif row['Score'] == 'Neutral':
-        plt.scatter(row['Polarity'], row['Subjectivity'], color="blue")
-
-plt.title('Twitter Sentiment Analysis')
-plt.xlabel('Polarity')
-plt.ylabel('Subjectivity')
-# add legend
 plt.show()
 
+# for index, row in df.iterrows():
+#     if row['Score'] == 'Positive':
+#         plt.scatter(row['Polarity'], row['Subjectivity'], color="green")
+#     elif row['Score'] == 'Negative':
+#         plt.scatter(row['Polarity'], row['Subjectivity'], color="red")
+#     elif row['Score'] == 'Neutral':
+#         plt.scatter(row['Polarity'], row['Subjectivity'], color="blue")
 
-objective = df[df['Subjectivity'] == 0]
+# plt.title('Twitter Sentiment Analysis')
+# plt.xlabel('Polarity')
+# plt.ylabel('Subjectivity')
+# # add legend
+# plt.show()
 
-print(str(objective.shape[0]/(df.shape[0])*100) + " % of objective tweets")
 
-# Creating a word cloud
-words = ' '.join([tweet for tweet in df['Tweet']])
-wordCloud = WordCloud(width=600, height=400).generate(words)
+# objective = df[df['Subjectivity'] == 0]
 
-plt.imshow(wordCloud)
-plt.savefig(twitterAccount + '.png')
-plt.show()
+# print(str(objective.shape[0]/(df.shape[0])*100) + " % of objective tweets")
 
-print(df.head(50))
+# # Creating a word cloud
+# words = ' '.join([tweet for tweet in df['Tweet']])
+# wordCloud = WordCloud(width=600, height=400).generate(words)
+
+# plt.imshow(wordCloud)
+# plt.savefig(twitterAccount + '.png')
+# plt.show()
+
+# print(df.head(50))
