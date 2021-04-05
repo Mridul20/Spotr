@@ -200,47 +200,57 @@ def check(user):
 
         df['Score'] = df['Polarity'].apply(getTextAnalysis)
         positive = df[df['Score'] == 'Positive']
-        data['positive_tweets'] =  str(positive.shape[0]/(df.shape[0])*100) + " %"
+        data['positive_tweets'] =  int(positive.shape[0]/(df.shape[0])*100) 
 
         labels = df.groupby('Score').count().index.values
         values = df.groupby('Score').size().values
         plt.switch_backend('agg')
         plt.bar(labels, values)
         my_path = os.path.dirname(os.path.realpath(__file__))
-        file_name = my_path +'\\user_data\\' + user + '1.png'
+        file_name = my_path +'\\static\\sentiment\\user_data\\' + user + '1.png'
         print(my_path)
         plt.savefig(file_name)  
-        data['chart1'] = file_name
+        data['chart1'] = '../static/sentiment/user_data/' + user + '1.png'
         plt.switch_backend('agg')
         for index, row in df.iterrows():
             if row['Score'] == 'Positive':
                 plt.scatter(row['Polarity'], row['Subjectivity'], color="green")
+                print('green')
             elif row['Score'] == 'Negative':
                 plt.scatter(row['Polarity'], row['Subjectivity'], color="red")
+                print('red')
             elif row['Score'] == 'Neutral':
                 plt.scatter(row['Polarity'], row['Subjectivity'], color="blue")
+                print('blue')
         plt.switch_backend('agg')
         plt.title('Twitter Sentiment Analysis')
         plt.xlabel('Polarity')
         plt.ylabel('Subjectivity')
-        file_name = my_path +'\\user_data\\' + user + '2.png'
+        file_name = my_path +'\\static\\sentiment\\user_data\\' + user + '2.png'
         plt.savefig(file_name)  
-        data['chart2'] = file_name
+        data['chart2'] = '../static/sentiment/user_data/' + user + '2.png'
         plt.switch_backend('agg')
         objective = df[df['Subjectivity'] == 0]
 
-        data['objective_tweets'] = str(objective.shape[0]/(df.shape[0])*100) + " %"
+        data['objective_tweets'] = int(objective.shape[0]/(df.shape[0])*100) 
 
         # Creating a word cloud
         words = ' '.join([tweet for tweet in df['Tweet']])
         wordCloud = WordCloud(width=600, height=400).generate(words)
         plt.switch_backend('agg')
         plt.imshow(wordCloud)
-        file_name = my_path +'\\user_data\\' + user + '3.png'
+        file_name = my_path +'\\static\\sentiment\\user_data\\' + user + '3.png'
         plt.savefig(file_name)  
-        data['chart3'] = file_name
+        data['chart3'] = '../static/sentiment/user_data/' + user + '3.png'
         plt.switch_backend('agg')
+        data['profile_image_url'] = data['profile_image_url'].replace("normal", "400x400")
         print(data)
+
+        for i in range(10):
+            data['tweet' + str(i) + 'tweet'] = df.loc[i]['Tweet']
+            data['tweet' + str(i) + 'Subjectivity'] = df.loc[i]['Subjectivity']
+            data['tweet' + str(i) + 'Polarity'] = df.loc[i]['Polarity']
+            data['tweet' + str(i) + 'Score'] = df.loc[i]['Score']
         found['twitter'] = 1
         data_twitter.clear()
         for key in data:
@@ -254,8 +264,6 @@ def check(user):
         add.save()
     except:
         found['twitter'] = 0
-    found['twitter'] = 1
-
 
 
     # Reddit
@@ -395,3 +403,16 @@ def reddit(request):
                          'verified': 'Verified', 'total_karma': 'Total Karma', 'created_utc': 'Created At'}}
         context = {'data': data}
         return render(request, "reddit.html", context)
+
+
+def sentiment(request):
+
+    if(found['twitter'] == 1):
+        context = {'data': data_twitter}
+        return render(request, "sentiment.html", context)
+    else:
+        data = {'name': 'Full Name', 'screen_name': 'Username', 'description': 'Description', 'location': 'Location',
+                'verified': 'Verified', 'followers_count': 'Follower Count', 'friends_count': 'Friend Count', 'created_at': 'Created Time',
+                'friendOfCount': 'Friend Count', 'status': {'created_at': 'Last Tweet Time', 'text': 'Last Tweet'}}
+        context = {'data': data}
+        return render(request, "sentiment.html", context)

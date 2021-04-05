@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sentimental Analysis</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="../static/sentiment/style.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+    <div class="container">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+
+
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- End of Topbar -->
+
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">{{data.name}}({{data.screen_name}})</h1>
+                        <p class="mb-4"> {{data.description}}
+                        </p>
+
+                        <!-- Content Row -->
+                        <div class="row">
+
+                            <div class="col-xl-8 col-lg-7">
+
+                                <!-- Area Chart -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Word Cloud</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- <div class="chart-area"> -->
+                                            <img src = {{data.chart3}} >
+                                        <!-- </div> -->
+                                        <hr>
+                                        An image composed of words used in a particular text or subject, in which the size of each word indicates its frequency or importance.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Donut Chart -->
+                            <div class="col-xl-4 col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Profile Pic</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 ">
+                                            <div class = "piyush">
+                                                <img src = {{data.profile_image_url}} >
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-left-info shadow h-20 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Positive Tweets
+                                                </div>
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{data.positive_tweets}}%</div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress progress-sm mr-2">
+                                                            <div class="progress-bar bg-info" role="progressbar"
+                                                                style="width: {{data.positive_tweets}}%" aria-valuenow="10" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card border-left-info shadow h-20 py-2 paras">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Objective Tweets
+                                                </div>
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{data.objective_tweets}}%</div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress progress-sm mr-2">
+                                                            <div class="progress-bar bg-info" role="progressbar"
+                                                                style="width: {{data.objective_tweets}}%" aria-valuenow="10" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-5">
+                                <!-- Bar Chart -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                                    </div>
+                                    <div class="card-body">
+                                            <img src = {{data.chart1}} class = "mridul">
+                                        <hr>
+                                        Positive sentiment is usually correlated with sentences or words that express happiness, enthusiasm, kindness.
+                                    </div>
+                                </div>
+                    
+                            </div>
+                            <div class="col-xl-6 col-lg-5">
+                                <!-- Bar Chart -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Polarity And Subjectivity</h6>
+                                    </div>
+                                    <div class="card-body" >     
+                                            <img src = {{data.chart2}} class = "mridul">
+                                        <hr>
+                                        Styling for the bar chart can be found in the
+                                        <code>/js/demo/chart-bar-demo.js</code> file.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Tweets</h1>
+                    <p class="mb-4">Last 10 tweets.</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>S. No</th>
+                                            <th>Tweet </th>
+                                            <th>Subjectivity</th>
+                                            <th>Polarity</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{{data.tweet0tweet}}</td>
+                                        <td>{{data.tweet0Subjectivity}}</td>
+                                        <td>{{data.tweet0Polarity}}</td>
+                                        <td>{{data.tweet0Score}}</td>
+                                    </tr>                                       
+                                    <tr>
+                                        <td>2</td>
+                                        <td>{{data.tweet1tweet}}</td>
+                                        <td>{{data.tweet1Subjectivity}}</td>
+                                        <td>{{data.tweet1Polarity}}</td>
+                                        <td>{{data.tweet1Score}}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>3</td>
+                                        <td>{{data.tweet2tweet}}</td>
+                                        <td>{{data.tweet2Subjectivity}}</td>
+                                        <td>{{data.tweet2Polarity}}</td>
+                                        <td>{{data.tweet2Score}}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>4</td>
+                                        <td>{{data.tweet3tweet}}</td>
+                                        <td>{{data.tweet3Subjectivity}}</td>
+                                        <td>{{data.tweet3Polarity}}</td>
+                                        <td>{{data.tweet3Score}}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>5</td>
+                                        <td>{{data.tweet4tweet}}</td>
+                                        <td>{{data.tweet4Subjectivity}}</td>
+                                        <td>{{data.tweet4Polarity}}</td>
+                                        <td>{{data.tweet4Score}}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>6</td>
+                                        <td>{{data.tweet5tweet}}</td>
+                                        <td>{{data.tweet5Subjectivity}}</td>
+                                        <td>{{data.tweet5Polarity}}</td>
+                                        <td>{{data.tweet5Score}}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>7</td>
+                                        <td>{{data.tweet6tweet}}</td>
+                                        <td>{{data.tweet6Subjectivity}}</td>
+                                        <td>{{data.tweet6Polarity}}</td>
+                                        <td>{{data.tweet6Score}}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>8</td>
+                                        <td>{{data.tweet7tweet}}</td>
+                                        <td>{{data.tweet7Subjectivity}}</td>
+                                        <td>{{data.tweet7Polarity}}</td>
+                                        <td>{{data.tweet7Score}}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>9</td>
+                                        <td>{{data.tweet8tweet}}</td>
+                                        <td>{{data.tweet8Subjectivity}}</td>
+                                        <td>{{data.tweet8Polarity}}</td>
+                                        <td>{{data.tweet8Score}}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>10</td>
+                                        <td>{{data.tweet9tweet}}</td>
+                                        <td>{{data.tweet9Subjectivity}}</td>
+                                        <td>{{data.tweet9Polarity}}</td>
+                                        <td>{{data.tweet9Score}}</td>
+                                    </tr>   
+                                         
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+    <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+
+    <!-- Core plugin JavaScript-->
+    <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
+
+    <!-- Custom scripts for all pages-->
+    <!-- <script src="js/sb-admin-2.min.js"></script> -->
+
+    <!-- Page level plugins -->
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
+
+</body>
+
+</html>

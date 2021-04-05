@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-  <link rel="stylesheet" href="../static/github/style.css">
+  <link rel="stylesheet" href="../static/twitter/style.css">
 </head>
 
 <body>
@@ -20,8 +20,11 @@
 
     <div class="profile-card js-profile-card">
       <div class="profile-card__img">
-        <img src='../user_data/piyush3.png'
-          alt="profile card">
+      {% if data.screen_name == 'Username' %}
+      <img src= "../static/home/assets/img/portfolio/twitter (2).png">
+      {% else %}
+      <img src={{data.profile_image_url}}>
+      {% endif %}
       </div>
 
       <div class="profile-card__cnt js-profile-cnt">
@@ -82,7 +85,9 @@
             onclick="document.location='https://twitter.com/{{data.screen_name}}'"
           {% endif %}
         >Display Profile</button>
-  
+        <button class="profile-card__button button--blue js-message-btn"
+          onclick="document.location='sentiment'"
+      >Sentimental Analysis</button>  
         </div>
       </div>
     </div>
