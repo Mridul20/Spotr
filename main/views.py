@@ -222,7 +222,6 @@ def check(user):
             elif row['Score'] == 'Neutral':
                 plt.scatter(row['Polarity'], row['Subjectivity'], color="blue")
                 print('blue')
-        plt.switch_backend('agg')
         plt.title('Twitter Sentiment Analysis')
         plt.xlabel('Polarity')
         plt.ylabel('Subjectivity')
@@ -247,10 +246,13 @@ def check(user):
         print(data)
 
         for i in range(10):
-            data['tweet' + str(i) + 'tweet'] = df.loc[i]['Tweet']
-            data['tweet' + str(i) + 'Subjectivity'] = df.loc[i]['Subjectivity']
-            data['tweet' + str(i) + 'Polarity'] = df.loc[i]['Polarity']
-            data['tweet' + str(i) + 'Score'] = df.loc[i]['Score']
+            try: 
+                data['tweet' + str(i) + 'tweet'] = df.loc[i]['Tweet']
+                data['tweet' + str(i) + 'Subjectivity'] = df.loc[i]['Subjectivity']
+                data['tweet' + str(i) + 'Polarity'] = df.loc[i]['Polarity']
+                data['tweet' + str(i) + 'Score'] = df.loc[i]['Score']
+            except:
+                break
         found['twitter'] = 1
         data_twitter.clear()
         for key in data:
@@ -277,32 +279,19 @@ def check(user):
             found["reddit"] = 0
     except:
         found["reddit"] = 1
-        ts = int(data['data']['created_utc'])
-        data['data']['created_utc'] = datetime.utcfromtimestamp(
-            ts).strftime('%H:%M:%S  %d-%m-%Y')
+        try:
+            ts = int(data['data']['created_utc'])
+            data['data']['created_utc'] = datetime.utcfromtimestamp(
+                ts).strftime('%H:%M:%S  %d-%m-%Y')
+        except:
+            data['data']['created_utc'] = "Date Created"   
         data_reddit.clear()
         for key in data:
             data_reddit[key] = data[key]
-        add = reddit_data(name=data['data']['name'], display_name=data['data']['id'],total_karma=data['data']['total_karma'],
-                          verified=data['data']['verified'], is_gold=data['data']['is_gold'],
-                          created_utc=data['data']['created_utc'], icon_img=data['data']['icon_img'])
-        add.save()
-    # if data['status'] == "OK":
-    #     data_reddit.clear()
-    #     for key in data:
-    #         data_reddit[key] = data[key]
-    #     try :
-    #         add = codeforces_data(organisation = data['organisation'],city=data['city'],country=data['country'],
-    #         first_name=data['firstName'],last_name=data['lastName'],handle=data['handle'],
-    #         reg_time = data['registrationTimeSeconds'],last_online = data['lastOnlineTimeSeconds'],
-    #         friends = data['friendOfCount'] , link = 'https://codeforces.com/profile/' + data['handle'],
-    #         max_rank=data['maxRank'],max_rating=data['maxRating'],rank=data['rank'],rating = data['rating'] )
-    #         add.save()
-    #     except:
-    #         add = codeforces_data(handle=data['handle'], reg_time = data['registrationTimeSeconds'],
-    #         last_online = data['lastOnlineTimeSeconds'],friends = data['friendOfCount'] ,
-    #         link = 'https://codeforces.com/profile/' + data['handle'])
-    #         add.save()
+        # add = reddit_data(name=data['data']['name'], display_name=data['data']['id'],total_karma=data['data']['total_karma'],
+        #                   verified=data['data']['verified'], is_gold=data['data']['is_gold'],
+        #                   created_utc=data['data']['created_utc'], icon_img=data['data']['icon_img'])
+        # add.save()
 
     return found
 
