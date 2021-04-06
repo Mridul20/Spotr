@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Register</title>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+ <!-- Compiled and minified JavaScript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <link rel="stylesheet" href="../static/login/app.css">
 </head>
 
@@ -17,7 +21,7 @@
           <div class="row">
              <!-- Brand Box -->
              <div class="col-sm-6 brand">
-               <a href="http://127.0.0.1:8000/"  class="logo"><img src="../static/home/assets/img/navbar-logos.png" alt="" width="100" height="100"/></a>
+               <a href="homepage"  class="logo"><img src="../static/home/assets/img/navbar-logos.png" alt="" width="100" height="100"/></a>
                 <div class="heading">
                    <h2>SPOTR</h2>
                    <p>Your Right Choice</p>
@@ -43,7 +47,7 @@
                          </div>
     
                       <div class="form-group">
-                         <label for="name">Last Name</label>
+                         <label for="name">  Name</label>
                          {{form.first_name}}
                          <span class="error"></span>
                       </div>
@@ -68,11 +72,18 @@
                         <div class="CTA">
                            <input type="submit" value="Signup Now" id="submit">
                             <a href="login">I have an account</a>
-                            {% if messages %}
-                            {% for message in messages %}
-                             {{message}}
-                            {% endfor %}
-                            {% endif %}
+                           {% if error %}
+                              {% if error.password2 %}
+                           <script>M.toast({html: "{{error.password2}}", classes: 'rounded'});</script>
+                              {% endif %}
+                              {% if error.username %}
+                           <script>M.toast({html: "{{error.username}}", classes: 'rounded'});</script>
+                              {% endif %}
+                           {% endif %}
+
+                           <!-- {% for i in error %}
+                              {{error.i}}
+                           {% endfor %} -->
                          </div>
                     </form>
                 </div><!-- End Signup Form -->
@@ -94,7 +105,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     
     <script src="../static/login/app.js"></script>
-    
+   
     </body>
     </html>
     

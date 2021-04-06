@@ -120,7 +120,7 @@ def check(user):
     # querystring = {"username":user}
 
     # headers = {
-    #     'x-rapidapi-key': "7de9fb3e1cmshebc5993304d0035p116a4cjsn3ab4d2417fd4",
+    #     'x-rapidapi-key': "ded0e36c2cmshe89f61756dc618cp142d1cjsn48c1977bfb91",
     #     'x-rapidapi-host': "instagram40.p.rapidapi.com"
     #     }
 
@@ -288,10 +288,9 @@ def check(user):
         data_reddit.clear()
         for key in data:
             data_reddit[key] = data[key]
-        # add = reddit_data(name=data['data']['name'], display_name=data['data']['id'],total_karma=data['data']['total_karma'],
-        #                   verified=data['data']['verified'], is_gold=data['data']['is_gold'],
-        #                   created_utc=data['data']['created_utc'], icon_img=data['data']['icon_img'])
-        # add.save()
+        add = reddit_data(name=data['data']['name'],total_karma=data['data']['total_karma'],
+                          created_utc=data['data']['created_utc'])
+        add.save()
 
     return found
 
@@ -304,11 +303,14 @@ def register(request):
             form.save()
             return redirect('main:login')
         else:
-            for msg in form.error_messages:
-                messages.error(request, f"{msg}: {form.error_messages[msg]}")
-                print(msg)
-
-    context = {'form': form}
+            print(form.errors.as_json())
+            dict1 = json.loads(form.errors.as_json())
+            dict2 = {}
+            for i in dict1:
+                dict2[i] = dict1[i][0]['message']
+            context = {'error' : dict2 , 'form' : form}
+            return render(request, "register.html", context)
+    context = {'form': form }
     return render(request, "register.html", context)
 
 
@@ -324,7 +326,9 @@ def loginpage(request):
             login(request, user)
             return redirect('main:homepage')
         else:
-            messages.info(request, "Invalid Username or Password")
+            msg = {'err':'1' ,'msg': "Invalid Username or Password"}
+            context = {'msg':msg}
+            return render(request, "login.html", context)
     context = {}
     return render(request, "login.html", context)
 
@@ -339,7 +343,7 @@ def github(request):
         context = {'data': data_github}
         return render(request, "github.html", context)
     else:
-        data = {'name': 'Full Name', 'login': 'Username', 'bio': 'Bio', 'location': 'Location', 'followers': 'Followers',
+        data = {'name': 'Full Name', 'avatar_url' : '../static/home/assets/img/portfolio/github (2).png', 'login': 'Username', 'bio': 'Bio', 'location': 'Location', 'followers': 'Followers',
                 'following': 'Following', 'public_repos': 'Public Repos', 'created_at': 'Time Created',
                 'updated_at': 'Last Updated Time'}
         context = {'data': data}
@@ -351,7 +355,7 @@ def codeforces(request):
         context = {'data': data_codeforces}
         return render(request, "codeforces.html", context)
     else:
-        data = {'firstName': 'Full', 'lastName': 'Name', 'handle': 'Username', 'rank': 'Rank', 'organization': 'Organization',
+        data = {'firstName': 'Full', 'titlePhoto' : '../static/home/assets/img/portfolio/codeforces (2).png' ,'lastName': 'Name', 'handle': 'Username', 'rank': 'Rank', 'organization': 'Organization',
                 'city': 'City', 'country': 'Country', 'rating': 'Rating', 'maxRating': 'Max Rating', 'friendOfCount': 'Friend Count',
                 'maxRank': 'Max Rank', 'lastOnlineTimeSeconds': 'Last Online Time', 'registrationTimeSeconds': 'Registration Time'}
         context = {'data': data}
@@ -363,7 +367,7 @@ def instagram(request):
         context = {'data': data_instagram}
         return render(request, "instagram.html", context)
     else:
-        data = {'full_name': 'Full', 'username': 'Username', 'biography': 'Biography', 'is_private': 'Private',
+        data = {'full_name': 'Full Name', 'profile_pic_url_hd' : '../static/home/assets/img/portfolio/instagram (2).png' ,'username': 'Username', 'biography': 'Biography', 'is_private': 'Private',
                 'edge_followed_by': {'count': 'Followers'}, 'edge_follow': {'count': 'Following'},
                 'edge_owner_to_timeline_media': {'count': 'Total Post'}}
         context = {'data': data}
@@ -375,7 +379,7 @@ def twitter(request):
         context = {'data': data_twitter}
         return render(request, "twitter.html", context)
     else:
-        data = {'name': 'Full Name', 'screen_name': 'Username', 'description': 'Description', 'location': 'Location',
+        data = {'name': 'Full Name', 'profile_image_url': '../static/home/assets/img/portfolio/twitter(2).png' ,'screen_name': 'Username', 'description': 'Description', 'location': 'Location',
                 'verified': 'Verified', 'followers_count': 'Follower Count', 'friends_count': 'Friend Count', 'created_at': 'Created Time',
                 'friendOfCount': 'Friend Count', 'status': {'created_at': 'Last Tweet Time', 'text': 'Last Tweet'}}
         context = {'data': data}
@@ -388,7 +392,7 @@ def reddit(request):
         context = {'data': data_reddit}
         return render(request, "reddit.html", context)
     else:
-        data = {'data': {'name': 'Name', 'subreddit': {'display_name': 'Display Name'}, 'public_description': 'Description', 'is_gold': 'Is GOLD',
+        data = {'data': {'name': 'Name', 'icon_img' : '../static/home/assets/img/portfolio/reddit (2).png', 'subreddit': {'display_name': 'Display Name'}, 'public_description': 'Description', 'is_gold': 'Is GOLD',
                          'verified': 'Verified', 'total_karma': 'Total Karma', 'created_utc': 'Created At'}}
         context = {'data': data}
         return render(request, "reddit.html", context)

@@ -20,6 +20,7 @@ from . import views
 app_name = "main"
 
 urlpatterns = [
+    path('homepage',views.homepage,name = "homepage"),
     path('',views.homepage,name = "homepage"),
     path('login',views.loginpage,name = "login"),
     path('register',views.register,name = "register"),
