@@ -31,6 +31,8 @@ class codeforces_data(models.Model):
     max_rank = models.CharField(max_length=200,null=True)
     link = models.CharField(max_length=200,null=True)
 
+    
+
     def __str__(self):
         return self.handle
 
