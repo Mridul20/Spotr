@@ -115,27 +115,27 @@ def check(user):
         add.save()
 
     # Instagram
-    # url = "https://instagram40.p.rapidapi.com/account-info"
+    url = "https://instagram40.p.rapidapi.com/account-info"
 
-    # querystring = {"username":user}
+    querystring = {"username":user}
 
-    # headers = {
-    #     'x-rapidapi-key': "ded0e36c2cmshe89f61756dc618cp142d1cjsn48c1977bfb91",
-    #     'x-rapidapi-host': "instagram40.p.rapidapi.com"
-    #     }
+    headers = {
+        'x-rapidapi-key': "ded0e36c2cmshe89f61756dc618cp142d1cjsn48c1977bfb91",
+        'x-rapidapi-host': "instagram40.p.rapidapi.com"
+        }
 
-    # data = requests.request("GET", url, headers=headers, params=querystring)
-    # data=data.json()
-    # try:
-    #     if(data["status"] == 'fail'):
-    #         found["instagram"] = 0
-    # except:
-    #     found["instagram"] = 1
-    #     data_instagram.clear()
-    #     for key in data:
-    #         data_instagram[key] = data[key]
-    #     add = instagram_data(name=data['full_name'],user_name=data['username'],bio=data['biography'],follower=data['edge_followed_by']['count'],following=data['edge_follow']['count'],link="https://www.instagram.com/" + data['username'], posts=data['edge_owner_to_timeline_media']['count'] , private= data['is_private'])
-    #     add.save()
+    data = requests.request("GET", url, headers=headers, params=querystring)
+    data=data.json()
+    try:
+        if(data["status"] == 'fail'):
+            found["instagram"] = 0
+    except:
+        found["instagram"] = 1
+        data_instagram.clear()
+        for key in data:
+            data_instagram[key] = data[key]
+        add = instagram_data(name=data['full_name'],user_name=data['username'],bio=data['biography'],follower=data['edge_followed_by']['count'],following=data['edge_follow']['count'],link="https://www.instagram.com/" + data['username'], posts=data['edge_owner_to_timeline_media']['count'] , private= data['is_private'])
+        add.save()
 
     # Twitter
     consumer_key = "FD9TutCsyTjewPgwptwwBMSAd"
