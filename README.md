@@ -7,6 +7,8 @@
 
 ## Setup/Installation Requirements
 Here is a run through of how to set up the application:
+
+# Method 1
 * Step 1 : Clone this repository using the git clone link:
   * **`git clone https://github.com/Mridul20/Spotr.git`**
 * Step 2 : Navigate to the directory:
@@ -14,6 +16,9 @@ Here is a run through of how to set up the application:
 * Step 3 : Open the directory created with your favorite IDE. If Atom type **`atom .`** if VSCode type **`code .`** . This will lauch the editor with the project setup,
 * Now feel free to hack around the project.
 * Run the command **'python manage.py runserver'** to create a local link.
+
+# Method 2
+* Directly navigate to the online hosting of the project from **[here](http://spotr.pythonanywhere.com/)**
 
 ## Known Bugs
 * None currently.
