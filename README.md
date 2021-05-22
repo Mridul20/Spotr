@@ -34,9 +34,9 @@ Here is a run through of how to set up the application:
 
 
 # Screenshots
-
+<!-- 
 ![alt text](https://github.com/Mridul20/titanic-survival-checker/blob/main/static/ss1.JPG)
-![alt text](https://github.com/Mridul20/titanic-survival-checker/blob/main/static/ss2.JPG)
+![alt text](https://github.com/Mridul20/titanic-survival-checker/blob/main/static/ss2.JPG) -->
 
 
 ## Author
