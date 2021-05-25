@@ -207,7 +207,7 @@ def check(user):
         plt.switch_backend('agg')
         plt.bar(labels, values)
         my_path = os.path.dirname(os.path.realpath(__file__))
-        file_name = my_path +'\\static\\sentiment\\user_data\\' + user + '1.png'
+        file_name = my_path +'/static/sentiment/user_data/' + user + '1.png'
         print(my_path)
         plt.savefig(file_name)  
         data['chart1'] = '../static/sentiment/user_data/' + user + '1.png'
@@ -225,7 +225,7 @@ def check(user):
         plt.title('Twitter Sentiment Analysis')
         plt.xlabel('Polarity')
         plt.ylabel('Subjectivity')
-        file_name = my_path +'\\static\\sentiment\\user_data\\' + user + '2.png'
+        file_name = my_path +'/static/sentiment/user_data/' + user + '2.png'
         plt.savefig(file_name)  
         data['chart2'] = '../static/sentiment/user_data/' + user + '2.png'
         plt.switch_backend('agg')
@@ -238,7 +238,7 @@ def check(user):
         wordCloud = WordCloud(width=600, height=400).generate(words)
         plt.switch_backend('agg')
         plt.imshow(wordCloud)
-        file_name = my_path +'\\static\\sentiment\\user_data\\' + user + '3.png'
+        file_name = my_path +'/static/sentiment/user_data/' + user + '3.png'
         plt.savefig(file_name)  
         data['chart3'] = '../static/sentiment/user_data/' + user + '3.png'
         plt.switch_backend('agg')
